@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M.Co — Tecnologia com Identidade</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:    #080808;
+  --ink:      #0D0D0D;
+  --white:    #F4F4F2;
+  --neon:     #39FF14;
+  --green:    #1A3A1F;
+  --green-m:  #2D5C35;
+  --gray:     #888;
+  --gray-dim: #444;
+  --border:   #1C1C1C;
+  --border-2: #242424;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Share Tech Mono', monospace;
+  overflow-x: hidden;
+}
+
+/* ── UTILITIES ── */
+.neon { color: var(--neon); }
+.label {
+  font-size: 9px;
+  color: var(--neon);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 64px;
+  height: 64px;
+  background: rgba(8,8,8,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.nav-logo svg { flex-shrink: 0; }
+
+.nav-logo-dot {
+  width: 5px; height: 5px;
+  background: var(--neon);
+  margin-bottom: -2px;
+}
+
+.nav-logo-co {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 26px;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 10px;
+  color: var(--gray);
+  text-decoration: none;
+  letter-spacing: 3px;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--white); }
+
+.nav-cta {
+  background: var(--neon) !important;
+  color: var(--black) !important;
+  padding: 8px 20px !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px !important;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 64px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Grid background */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(57,255,20,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57,255,20,.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+/* Neon top line */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 64px; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 5%, var(--neon) 30%, var(--neon) 70%, transparent 95%);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.hero-glow {
+  position: absolute;
+  top: 10%; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(26,58,31,.25) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+}
+
+.hero-eyebrow {
+  font-size: 9px;
+  color: var(--neon);
+  letter-spacing: 5px;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+
+.hero-logo-mark {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.35s forwards;
+}
+
+.hero-dot {
+  width: 10px; height: 10px;
+  background: var(--neon);
+  flex-shrink: 0;
+  margin-bottom: 16px;
+}
+
+.hero-co {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 80px;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.hero-headline {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1.15;
+  letter-spacing: -1px;
+  max-width: 780px;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.5s forwards;
+}
+
+.hero-headline em {
+  font-style: normal;
+  color: var(--neon);
+}
+
+.hero-sub {
+  font-size: 13px;
+  color: rgba(244,244,242,.55);
+  line-height: 2;
+  max-width: 520px;
+  margin-bottom: 56px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.65s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.8s forwards;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--neon);
+  color: var(--black);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  padding: 16px 32px;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gray);
+  text-decoration: none;
+  font-size: 10px;
+  letter-spacing: 3px;
+  border-bottom: 1px solid var(--gray-dim);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.btn-ghost:hover { color: var(--white); border-color: var(--white); }
+
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 64px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  animation: fadeUp 0.8s 1.1s forwards;
+}
+
+.scroll-line {
+  width: 32px; height: 1px;
+  background: var(--gray-dim);
+}
+
+.scroll-text {
+  font-size: 8px;
+  color: var(--gray-dim);
+  letter-spacing: 3px;
+}
+
+/* ── MANIFESTO STRIP ── */
+.strip {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 64px;
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.strip-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.strip-dot {
+  width: 4px; height: 4px;
+  background: var(--neon);
+  flex-shrink: 0;
+}
+
+.strip-text {
+  font-size: 10px;
+  color: var(--gray);
+  letter-spacing: 3px;
+}
+
+/* ── SECTION BASE ── */
+section {
+  padding: 120px 64px;
+  position: relative;
+}
+
+.section-header {
+  margin-bottom: 64px;
+}
+
+.section-title {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  margin-top: 12px;
+}
+
+/* ── SOBRE / INTRO ── */
+.sobre-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1200px;
+}
+
+.sobre-body {
+  font-size: 14px;
+  color: rgba(244,244,242,.6);
+  line-height: 2;
+}
+
+.sobre-body p + p { margin-top: 16px; }
+
+.sobre-body strong { color: var(--white); font-weight: 400; }
+
+.sobre-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.stat-card {
+  background: var(--ink);
+  border: 1px solid var(--border);
+  padding: 28px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px; height: 100%;
+  background: var(--neon);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.stat-card:hover::before { opacity: 1; }
+
+.stat-num {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 40px;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat-num span { color: var(--neon); }
+
+.stat-label {
+  font-size: 9px;
+  color: var(--gray);
+  letter-spacing: 3px;
+}
+
+/* ── WEBFREQUENCY ── */
+.wf-section {
+  background: var(--ink);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.wf-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.wf-eq {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 36px;
+}
+
+.eq-bar { border-radius: 1px 1px 0 0; transition: height 0.4s ease; }
+
+.wf-name {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.wf-name .web { color: var(--white); }
+.wf-name .sep {
+  display: inline-block;
+  width: 9px; height: 9px;
+  background: var(--neon);
+  margin: 0 6px 4px;
+  vertical-align: middle;
+}
+.wf-name .freq { color: var(--green-m); }
+
+.wf-tagline {
+  font-size: 10px;
+  color: var(--gray);
+  letter-spacing: 4px;
+  margin-bottom: 64px;
+}
+
+/* Planos */
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  max-width: 1200px;
+}
+
+.plan-card {
+  background: var(--black);
+  border: 1px solid var(--border);
+  padding: 40px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s;
+  cursor: default;
+}
+
+.plan-card:hover { border-color: var(--gray-dim); }
+
+.plan-card.featured {
+  border-color: var(--green-m);
+  background: rgba(26,58,31,.08);
+}
+
+.plan-card.featured:hover { border-color: var(--neon); }
+
+.plan-badge {
+  display: inline-block;
+  background: var(--green);
+  color: var(--neon);
+  font-size: 7px;
+  letter-spacing: 3px;
+  padding: 3px 10px;
+  margin-bottom: 24px;
+}
+
+.plan-name-label {
+  font-size: 9px;
+  color: var(--neon);
+  letter-spacing: 4px;
+  margin-bottom: 8px;
+}
+
+.plan-name {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 28px;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.plan-price {
+  font-family: 'EB Garamond', serif;
+  font-size: 48px;
+  color: var(--white);
+  line-height: 1;
+  margin: 20px 0 4px;
+  letter-spacing: -1px;
+}
+
+.plan-price sup {
+  font-size: 20px;
+  vertical-align: super;
+  letter-spacing: 0;
+  color: var(--gray);
+}
+
+.plan-prazo {
+  font-size: 9px;
+  color: var(--gray);
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+}
+
+.plan-divider {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 28px;
+}
+
+.plan-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.plan-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 11px;
+  color: rgba(244,244,242,.7);
+  line-height: 1.6;
+}
+
+.plan-features li::before {
+  content: '';
+  display: block;
+  width: 4px; height: 4px;
+  background: var(--neon);
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.plan-features li.muted { color: var(--gray-dim); }
+.plan-features li.muted::before { background: var(--gray-dim); }
+
+.plan-cta {
+  display: block;
+  text-align: center;
+  margin-top: 36px;
+  padding: 14px;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  color: var(--gray);
+  transition: all 0.2s;
+}
+
+.plan-cta:hover {
+  border-color: var(--neon);
+  color: var(--neon);
+}
+
+.plan-card.featured .plan-cta {
+  background: var(--neon);
+  border-color: var(--neon);
+  color: var(--black);
+  font-weight: 700;
+}
+
+.plan-card.featured .plan-cta:hover { opacity: 0.88; }
+
+/* ── INCLUSO ── */
+.incluso-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  max-width: 1200px;
+}
+
+.incluso-card {
+  background: var(--ink);
+  border: 1px solid var(--border);
+  padding: 32px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+
+.incluso-card:hover { border-color: var(--gray-dim); }
+
+.incluso-icon {
+  margin-bottom: 20px;
+}
+
+.incluso-icon svg { display: block; }
+
+.incluso-title {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 20px;
+  color: var(--white);
+  margin-bottom: 10px;
+  letter-spacing: -0.3px;
+}
+
+.incluso-desc {
+  font-size: 10px;
+  color: var(--gray);
+  line-height: 1.9;
+}
+
+/* ── PROCESSO ── */
+.processo-section { background: var(--black); }
+
+.processo-steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  max-width: 1200px;
+  position: relative;
+}
+
+.processo-steps::before {
+  content: '';
+  position: absolute;
+  top: 28px; left: 28px; right: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--neon), var(--green-m), var(--border));
+  pointer-events: none;
+}
+
+.step {
+  padding: 0 24px 0 0;
+  position: relative;
+  z-index: 1;
+}
+
+.step-num {
+  width: 56px; height: 56px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--neon);
+  letter-spacing: 1px;
+  background: var(--black);
+  margin-bottom: 24px;
+}
+
+.step-title {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.step-desc {
+  font-size: 10px;
+  color: var(--gray);
+  line-height: 1.9;
+}
+
+/* ── MOONPANY PARCERIA ── */
+.moonpany-section {
+  background: var(--ink);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.moonpany-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1200px;
+}
+
+.moonpany-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--green);
+  color: var(--neon);
+  font-size: 8px;
+  letter-spacing: 3px;
+  padding: 4px 12px;
+  margin-bottom: 24px;
+}
+
+.moonpany-title {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 40px;
+  color: var(--white);
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+}
+
+.moonpany-desc {
+  font-size: 13px;
+  color: rgba(244,244,242,.6);
+  line-height: 2;
+  margin-bottom: 32px;
+}
+
+.moonpany-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.moonpany-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 12px;
+  color: rgba(244,244,242,.75);
+  line-height: 1.6;
+}
+
+.moonpany-list li::before {
+  content: '';
+  display: block;
+  width: 4px; height: 4px;
+  background: var(--neon);
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.moonpany-list li strong { color: var(--white); font-weight: 400; }
+
+.moonpany-visual {
+  background: var(--black);
+  border: 1px solid var(--border);
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.moonpany-visual::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(57,255,20,.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57,255,20,.02) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.moonpany-placeholder {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.moonpany-placeholder p {
+  font-size: 9px;
+  color: var(--gray-dim);
+  letter-spacing: 3px;
+  margin-top: 12px;
+}
+
+/* ── CTA ── */
+.cta-section {
+  background: var(--green);
+  position: relative;
+  overflow: hidden;
+  padding: 120px 64px;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--neon) 30%, var(--neon) 70%, transparent);
+}
+
+.cta-section::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(57,255,20,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57,255,20,.03) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.cta-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+}
+
+.cta-eyebrow {
+  font-size: 9px;
+  color: rgba(255,255,255,.4);
+  letter-spacing: 5px;
+  margin-bottom: 24px;
+}
+
+.cta-title {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 500;
+  color: #fff;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+}
+
+.cta-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,.5);
+  letter-spacing: 2px;
+  line-height: 2;
+  margin-bottom: 48px;
+}
+
+.cta-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--neon);
+  color: var(--green);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  padding: 18px 36px;
+  transition: opacity 0.2s;
+}
+
+.cta-btn:hover { opacity: 0.88; }
+
+.cta-note {
+  font-size: 9px;
+  color: rgba(255,255,255,.25);
+  letter-spacing: 2px;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--black);
+  border-top: 1px solid var(--border);
+  padding: 48px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-logo-co {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--white);
+}
+
+.footer-copy {
+  font-size: 9px;
+  color: var(--gray-dim);
+  letter-spacing: 2px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 32px;
+}
+
+.footer-links a {
+  font-size: 9px;
+  color: var(--gray-dim);
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--gray); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes eqPulse {
+  0%, 100% { height: var(--h1); }
+  50% { height: var(--h2); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE (tablet) ── */
+@media (max-width: 1024px) {
+  nav { padding: 0 32px; }
+  .nav-links { display: none; }
+  section { padding: 80px 32px; }
+  .hero { padding: 100px 32px 60px; }
+  .strip { padding: 16px 32px; gap: 32px; }
+  .sobre-grid { grid-template-columns: 1fr; gap: 48px; }
+  .plans-grid { grid-template-columns: 1fr; max-width: 480px; }
+  .incluso-grid { grid-template-columns: 1fr 1fr; }
+  .processo-steps { grid-template-columns: 1fr 1fr; }
+  .processo-steps::before { display: none; }
+  .moonpany-inner { grid-template-columns: 1fr; gap: 40px; }
+  .cta-section { padding: 80px 32px; }
+  footer { padding: 40px 32px; flex-direction: column; gap: 24px; text-align: center; }
+  .footer-logo { justify-content: center; }
+}
+
+@media (max-width: 640px) {
+  section { padding: 64px 24px; }
+  .hero { padding: 80px 24px 40px; }
+  .hero-co { font-size: 56px; }
+  .strip { display: none; }
+  .incluso-grid { grid-template-columns: 1fr; }
+  .processo-steps { grid-template-columns: 1fr; }
+  .hero-scroll { left: 24px; }
+  footer { padding: 32px 24px; }
+  .footer-links { flex-direction: column; align-items: center; gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 62 62" fill="none">
+      <line x1="10" y1="52" x2="10" y2="10" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
+      <line x1="10" y1="10" x2="31" y2="36" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
+      <line x1="31" y1="36" x2="52" y2="10" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
+      <line x1="52" y1="10" x2="52" y2="52" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
+    </svg>
+    <div class="nav-logo-dot"></div>
+    <span class="nav-logo-co">Co</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#sobre">// sobre</a></li>
+    <li><a href="#webfrequency">// produtos</a></li>
+    <li><a href="#processo">// processo</a></li>
+    <li><a href="#parceria">// parceria</a></li>
+    <li><a href="#contato" class="nav-cta">FALAR AGORA</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HERO ══ -->
+<div class="hero" id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">// M.Co — Meirelles Company</div>
+    <div class="hero-logo-mark">
+      <svg width="64" height="64" viewBox="0 0 62 62" fill="none">
+        <line x1="10" y1="54" x2="10" y2="10" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
+        <line x1="10" y1="10" x2="31" y2="38" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
+        <line x1="31" y1="38" x2="52" y2="10" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
+        <line x1="52" y1="10" x2="52" y2="54" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
+      </svg>
+      <div class="hero-dot"></div>
+      <span class="hero-co">Co</span>
+    </div>
+    <h1 class="hero-headline">
+      Tecnologia com <em>identidade.</em><br>
+      Presença digital que<br>é levada a sério.
+    </h1>
+    <p class="hero-sub">
+      Construímos soluções digitais de alta fidelidade para empresas que
+      querem crescer com credibilidade — do site ao ecossistema completo.
+    </p>
+    <div class="hero-actions">
+      <a href="#contato" class="btn-primary">
+        COMEÇAR PROJETO
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="#080808" stroke-width="1.5" stroke-linecap="square"/>
+        </svg>
+      </a>
+      <a href="#webfrequency" class="btn-ghost">VER PRODUTOS →</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">SCROLL</span>
+  </div>
+</div>
+
+<!-- ══ STRIP ══ -->
+<div class="strip">
+  <div class="strip-item"><div class="strip-dot"></div><span class="strip-text">SITES DE ALTA PERFORMANCE</span></div>
+  <div class="strip-item"><div class="strip-dot"></div><span class="strip-text">SEO TÉCNICO AVANÇADO</span></div>
+  <div class="strip-item"><div class="strip-dot"></div><span class="strip-text">IDENTIDADE VISUAL CONSISTENTE</span></div>
+  <div class="strip-item"><div class="strip-dot"></div><span class="strip-text">ENTREGA EM ATÉ 25 DIAS ÚTEIS</span></div>
+  <div class="strip-item"><div class="strip-dot"></div><span class="strip-text">HOSPEDAGEM + DOMÍNIO INCLUSOS</span></div>
+  <div class="strip-item"><div class="strip-dot"></div><span class="strip-text">SUPORTE E MANUTENÇÃO MENSAL</span></div>
+  <div class="strip-item"><div class="strip-dot"></div><span class="strip-text">SITES DE ALTA PERFORMANCE</span></div>
+  <div class="strip-item"><div class="strip-dot"></div><span class="strip-text">SEO TÉCNICO AVANÇADO</span></div>
+</div>
+
+<!-- ══ SOBRE ══ -->
+<section id="sobre">
+  <div class="sobre-grid">
+    <div class="reveal">
+      <div class="label" style="margin-bottom: 16px;">// quem somos</div>
+      <h2 class="section-title">Soluções digitais que geram resultado real.</h2>
+      <div style="height:32px"></div>
+      <div class="sobre-body">
+        <p>A <strong>M.Co — Meirelles Company</strong> é uma empresa de tecnologia focada em criar presença digital de alta fidelidade para negócios que querem ser levados a sério no mercado.</p>
+        <p>Nossa principal linha de produtos é a <strong>WebFrequency</strong> — um portfólio de soluções web que vai da landing page ao site premium, entregando tecnologia, identidade e performance em cada projeto.</p>
+        <p>Atuamos ao lado de parceiros estratégicos para oferecer um ecossistema digital completo: do site ao conteúdo visual, do SEO à manutenção contínua.</p>
+      </div>
+    </div>
+    <div class="sobre-stats reveal" style="transition-delay: 0.15s;">
+      <div class="stat-card">
+        <div class="stat-num">7<span>d</span></div>
+        <div class="stat-label">ENTREGA LANDING PAGE</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">25<span>d</span></div>
+        <div class="stat-label">ENTREGA SITE PREMIUM</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3<span>×</span></div>
+        <div class="stat-label">PLANOS DISPONÍVEIS</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">100<span>%</span></div>
+        <div class="stat-label">PROJETOS SOB MEDIDA</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WEBFREQUENCY ══ -->
+<section id="webfrequency" class="wf-section">
+  <div class="reveal">
+    <div class="label" style="margin-bottom: 16px;">// produto principal</div>
+    <div class="wf-header">
+      <div class="wf-eq" id="wf-eq">
+        <div class="eq-bar" style="width:6px;height:35%;background:#1C1C1C;"></div>
+        <div class="eq-bar" style="width:6px;height:55%;background:var(--green-m);"></div>
+        <div class="eq-bar" style="width:6px;height:90%;background:var(--green-m);"></div>
+        <div class="eq-bar" style="width:6px;height:65%;background:var(--neon);opacity:.6;"></div>
+        <div class="eq-bar" style="width:6px;height:100%;background:var(--neon);opacity:.4;"></div>
+        <div class="eq-bar" style="width:6px;height:75%;background:var(--green-m);"></div>
+        <div class="eq-bar" style="width:6px;height:90%;background:var(--green-m);"></div>
+        <div class="eq-bar" style="width:6px;height:55%;background:#1C1C1C;"></div>
+        <div class="eq-bar" style="width:6px;height:35%;background:#1C1C1C;"></div>
+      </div>
+      <div class="wf-name">
+        <span class="web">Web</span><span class="sep"></span><span class="freq">Frequency</span>
+      </div>
+    </div>
+    <div class="wf-tagline">// sites &amp; presença digital de alta fidelidade</div>
+  </div>
+
+  <div class="plans-grid">
+    <!-- Landing Page -->
+    <div class="plan-card reveal" style="transition-delay: 0.1s;">
+      <div class="plan-name-label">landing page</div>
+      <div class="plan-name">Entrada</div>
+      <div class="plan-price"><sup>R$</sup>890</div>
+      <div class="plan-prazo">// entrega em até 7 dias úteis</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li>1 página otimizada e responsiva</li>
+        <li>Integração com WhatsApp</li>
+        <li>Formulário de contato</li>
+        <li>SEO básico configurado</li>
+        <li>Hospedagem inclusa no 1º ano</li>
+        <li>Domínio incluso no 1º ano</li>
+        <li class="muted">Blog integrado</li>
+        <li class="muted">Múltiplas páginas</li>
+        <li class="muted">Integrações avançadas</li>
+      </ul>
+      <a href="#contato" class="plan-cta">SOLICITAR →</a>
+    </div>
+
+    <!-- Site Profissional -->
+    <div class="plan-card featured reveal" style="transition-delay: 0.2s;">
+      <div class="plan-badge">// MAIS VENDIDO</div>
+      <div class="plan-name-label">site profissional</div>
+      <div class="plan-name">Profissional</div>
+      <div class="plan-price"><sup>R$</sup>2.490</div>
+      <div class="plan-prazo">// entrega em até 15 dias úteis</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li>Até 5 páginas completas</li>
+        <li>Integração com WhatsApp</li>
+        <li>Formulário de contato</li>
+        <li>SEO técnico completo</li>
+        <li>Hospedagem inclusa no 1º ano</li>
+        <li>Domínio incluso no 1º ano</li>
+        <li>Mapa e localização integrados</li>
+        <li>Galeria de produtos/serviços</li>
+        <li class="muted">Blog integrado</li>
+      </ul>
+      <a href="#contato" class="plan-cta">SOLICITAR →</a>
+    </div>
+
+    <!-- Site Premium -->
+    <div class="plan-card reveal" style="transition-delay: 0.3s;">
+      <div class="plan-name-label">site premium</div>
+      <div class="plan-name">Premium</div>
+      <div class="plan-price"><sup>R$</sup>4.890</div>
+      <div class="plan-prazo">// entrega em até 25 dias úteis</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li>Até 8 páginas sob medida</li>
+        <li>Integração com WhatsApp</li>
+        <li>Formulário de contato avançado</li>
+        <li>SEO avançado + performance</li>
+        <li>Hospedagem inclusa no 1º ano</li>
+        <li>Domínio incluso no 1º ano</li>
+        <li>Mapa e localização integrados</li>
+        <li>Blog integrado e gerenciável</li>
+        <li>Integrações personalizadas</li>
+      </ul>
+      <a href="#contato" class="plan-cta">SOLICITAR →</a>
+    </div>
+  </div>
+
+  <div style="margin-top:24px; max-width:1200px;">
+    <p style="font-size:9px;color:var(--gray-dim);letter-spacing:2px;">
+      * Todos os planos incluem suporte técnico no período de garantia. Manutenção mensal disponível como serviço adicional.
+    </p>
+  </div>
+</section>
+
+<!-- ══ INCLUSO ══ -->
+<section id="incluso">
+  <div class="section-header reveal">
+    <div class="label">// o que está incluso</div>
+    <h2 class="section-title">Tudo que seu negócio<br>precisa para crescer online.</h2>
+  </div>
+
+  <div class="incluso-grid">
+    <div class="incluso-card reveal" style="transition-delay:0.05s;">
+      <div class="incluso-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect x="2" y="5" width="28" height="20" rx="1" stroke="#39FF14" stroke-width="1.5"/>
+          <path d="M10 25v4M22 25v4M6 29h20" stroke="#39FF14" stroke-width="1.5" stroke-linecap="square"/>
+          <path d="M8 12h16M8 17h10" stroke="#39FF14" stroke-width="1" opacity=".5"/>
+        </svg>
+      </div>
+      <div class="incluso-title">Design Responsivo</div>
+      <div class="incluso-desc">Site adaptado para todos os dispositivos — celular, tablet e desktop — com performance otimizada.</div>
+    </div>
+    <div class="incluso-card reveal" style="transition-delay:0.1s;">
+      <div class="incluso-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="12" stroke="#39FF14" stroke-width="1.5"/>
+          <path d="M16 4c0 0-6 4-6 12s6 12 6 12" stroke="#39FF14" stroke-width="1" opacity=".5"/>
+          <path d="M4 16h24" stroke="#39FF14" stroke-width="1" opacity=".5"/>
+          <circle cx="16" cy="16" r="3" fill="#39FF14" opacity=".4"/>
+        </svg>
+      </div>
+      <div class="incluso-title">SEO Configurado</div>
+      <div class="incluso-desc">Configuração técnica de SEO para que seu negócio apareça nas primeiras posições do Google.</div>
+    </div>
+    <div class="incluso-card reveal" style="transition-delay:0.15s;">
+      <div class="incluso-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect x="3" y="6" width="26" height="20" rx="1" stroke="#39FF14" stroke-width="1.5"/>
+          <path d="M3 11h26" stroke="#39FF14" stroke-width="1" opacity=".5"/>
+          <circle cx="7" cy="8.5" r="1" fill="#39FF14" opacity=".5"/>
+          <circle cx="11" cy="8.5" r="1" fill="#39FF14" opacity=".5"/>
+          <path d="M8 18l4-4 4 4 5-5" stroke="#39FF14" stroke-width="1.5" stroke-linecap="square"/>
+        </svg>
+      </div>
+      <div class="incluso-title">Hospedagem + Domínio</div>
+      <div class="incluso-desc">Hospedagem em servidor rápido e domínio próprio inclusos no primeiro ano de contrato.</div>
+    </div>
+    <div class="incluso-card reveal" style="transition-delay:0.2s;">
+      <div class="incluso-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <path d="M26 18c0 4.4-3.6 8-8 8H10c-3.3 0-6-2.7-6-6 0-2.9 2-5.3 4.8-5.9.3-3.4 3.2-6.1 6.7-6.1 3.2 0 5.9 2.2 6.6 5.2C23.8 13.5 26 15.5 26 18z" stroke="#39FF14" stroke-width="1.5"/>
+          <path d="M16 22v-8M13 17l3-3 3 3" stroke="#39FF14" stroke-width="1.5" stroke-linecap="square"/>
+        </svg>
+      </div>
+      <div class="incluso-title">WhatsApp + Formulários</div>
+      <div class="incluso-desc">Botão de WhatsApp flutuante e formulário de contato integrados para captura imediata de leads.</div>
+    </div>
+    <div class="incluso-card reveal" style="transition-delay:0.25s;">
+      <div class="incluso-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <path d="M6 28V12l10-8 10 8v16" stroke="#39FF14" stroke-width="1.5" stroke-linecap="square"/>
+          <rect x="13" y="20" width="6" height="8" stroke="#39FF14" stroke-width="1.5"/>
+          <path d="M10 16h4M18 16h4M10 20h2M20 20h2" stroke="#39FF14" stroke-width="1" opacity=".4"/>
+        </svg>
+      </div>
+      <div class="incluso-title">Identidade Visual</div>
+      <div class="incluso-desc">Aplicação consistente da sua identidade visual em todo o site — cores, tipografia e elementos de marca.</div>
+    </div>
+    <div class="incluso-card reveal" style="transition-delay:0.3s;">
+      <div class="incluso-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="10" stroke="#39FF14" stroke-width="1.5"/>
+          <path d="M16 10v6l4 4" stroke="#39FF14" stroke-width="1.5" stroke-linecap="square"/>
+          <circle cx="16" cy="16" r="2" fill="#39FF14" opacity=".4"/>
+        </svg>
+      </div>
+      <div class="incluso-title">Suporte Técnico</div>
+      <div class="incluso-desc">Suporte técnico durante o período de garantia e manutenção mensal disponível para manter tudo funcionando.</div>
+    </div>
+    <div class="incluso-card reveal" style="transition-delay:0.35s;">
+      <div class="incluso-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <path d="M4 28l6-6M22 4l6 6-16 16-8-2 2-8L22 4z" stroke="#39FF14" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+          <path d="M19 7l6 6" stroke="#39FF14" stroke-width="1" opacity=".5"/>
+        </svg>
+      </div>
+      <div class="incluso-title">Mapa &amp; Localização</div>
+      <div class="incluso-desc">Integração com Google Maps para que seus clientes encontrem sua empresa com facilidade. (Plano Prof. +)</div>
+    </div>
+    <div class="incluso-card reveal" style="transition-delay:0.4s;">
+      <div class="incluso-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect x="4" y="6" width="24" height="20" rx="1" stroke="#39FF14" stroke-width="1.5"/>
+          <path d="M4 12h24" stroke="#39FF14" stroke-width="1" opacity=".5"/>
+          <path d="M9 18h14M9 22h9" stroke="#39FF14" stroke-width="1.5" stroke-linecap="square" opacity=".6"/>
+          <circle cx="16" cy="9" r="1" fill="#39FF14" opacity=".5"/>
+        </svg>
+      </div>
+      <div class="incluso-title">Blog Integrado</div>
+      <div class="incluso-desc">Área de blog gerenciável para produção de conteúdo e fortalecimento do SEO a longo prazo. (Plano Premium)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESSO ══ -->
+<section id="processo" class="processo-section">
+  <div class="section-header reveal">
+    <div class="label">// como funciona</div>
+    <h2 class="section-title">Do briefing ao ar<br>em etapas claras.</h2>
+  </div>
+  <div class="processo-steps">
+    <div class="step reveal" style="transition-delay:0.05s;">
+      <div class="step-num">01</div>
+      <div class="step-title">Briefing</div>
+      <div class="step-desc">Entendemos sua empresa, seus objetivos e o que você quer comunicar. Sem enrolação.</div>
+    </div>
+    <div class="step reveal" style="transition-delay:0.15s;">
+      <div class="step-num">02</div>
+      <div class="step-title">Proposta</div>
+      <div class="step-desc">Enviamos proposta personalizada com escopo, prazo e investimento. Você aprova e assinamos.</div>
+    </div>
+    <div class="step reveal" style="transition-delay:0.25s;">
+      <div class="step-num">03</div>
+      <div class="step-title">Design</div>
+      <div class="step-desc">Criamos o layout completo com sua identidade visual. Você revisa e aprova antes de codar.</div>
+    </div>
+    <div class="step reveal" style="transition-delay:0.35s;">
+      <div class="step-num">04</div>
+      <div class="step-title">Desenvolvimento</div>
+      <div class="step-desc">Construímos o site com tecnologia de alta performance, SEO e todas as integrações.</div>
+    </div>
+    <div class="step reveal" style="transition-delay:0.45s;">
+      <div class="step-num">05</div>
+      <div class="step-title">Entrega</div>
+      <div class="step-desc">Site no ar com domínio e hospedagem configurados. Suporte garantido no primeiro período.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MOONPANY PARCERIA ══ -->
+<section id="parceria" class="moonpany-section">
+  <div class="moonpany-inner">
+    <div class="reveal">
+      <div class="label" style="margin-bottom:16px;">// parceria estratégica</div>
+      <div class="moonpany-badge">
+        <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+          <circle cx="4" cy="4" r="3" stroke="#39FF14" stroke-width="1"/>
+        </svg>
+        PARCEIRA OFICIAL
+      </div>
+      <div class="moonpany-title">Moonpany</div>
+      <div class="moonpany-desc">
+        Especialista em produção áudio visual, a Moonpany complementa a WebFrequency 
+        com foto, vídeo, identidade de marca e conteúdo para redes sociais — 
+        formando um ecossistema digital completo para o seu negócio.
+      </div>
+      <ul class="moonpany-list">
+        <li><strong>Site profissional</strong> com identidade visual, SEO e presença no Google — WebFrequency</li>
+        <li><strong>Fotos e vídeos</strong> da empresa, equipe, produtos e serviços — Moonpany</li>
+        <li><strong>Conteúdo para redes sociais</strong> alinhado com sua marca — Moonpany</li>
+        <li><strong>Hospedagem + domínio</strong> inclusos no 1º ano, manutenção — WebFrequency</li>
+      </ul>
+    </div>
+    <div class="moonpany-visual reveal" style="transition-delay:0.2s;">
+      <div class="moonpany-placeholder">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+          <rect x="4" y="12" width="40" height="32" rx="1" stroke="#444" stroke-width="1.5"/>
+          <path d="M44 20l12-6v24l-12-6V20z" stroke="#444" stroke-width="1.5" stroke-linejoin="round"/>
+          <circle cx="24" cy="28" r="6" stroke="#444" stroke-width="1.5"/>
+          <path d="M4 36l10-10 8 8 6-6 16 16" stroke="#444" stroke-width="1" opacity=".5"/>
+        </svg>
+        <p>produção áudio visual</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section id="contato" class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-eyebrow">// vamos construir juntos</div>
+    <div class="cta-title">Pronto para ter um site que faz diferença?</div>
+    <div class="cta-sub">
+      Responda agora e receba uma proposta personalizada.<br>
+      Sem enrolação. Entrega garantida.
+    </div>
+    <div class="cta-actions">
+      <a href="https://wa.me/55" class="cta-btn">
+        FALAR COM LUCAS →
+      </a>
+      <span class="cta-note">// WhatsApp · Resposta em até 2h</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-logo">
+    <svg width="24" height="24" viewBox="0 0 62 62" fill="none">
+      <line x1="10" y1="52" x2="10" y2="10" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
+      <line x1="10" y1="10" x2="31" y2="36" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
+      <line x1="31" y1="36" x2="52" y2="10" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
+      <line x1="52" y1="10" x2="52" y2="52" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
+    </svg>
+    <div style="width:4px;height:4px;background:var(--neon);margin-bottom:-1px;margin-left:4px;"></div>
+    <span class="footer-logo-co" style="margin-left:4px;">Co</span>
+  </div>
+  <div class="footer-copy">© 2026 M.Co — Meirelles Company. WebFrequency · Moonpany</div>
+  <div class="footer-links">
+    <a href="#webfrequency">Produtos</a>
+    <a href="#processo">Processo</a>
+    <a href="#parceria">Parceria</a>
+    <a href="#contato">Contato</a>
+  </div>
+</footer>
+
+<script>
+// ── Scroll reveal ──
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(el => observer.observe(el));
+
+// ── EQ bars animation ──
+const eqBars = document.querySelectorAll('#wf-eq .eq-bar');
+function animateEQ() {
+  eqBars.forEach(bar => {
+    const h = 30 + Math.random() * 70;
+    bar.style.height = h + '%';
+  });
+}
+setInterval(animateEQ, 600);
+
+// ── Tweaks ──
+window.addEventListener('message', (e) => {
+  if (e.data?.type === '__activate_edit_mode') {
+    document.getElementById('tweaks-panel').style.display = 'flex';
+  }
+  if (e.data?.type === '__deactivate_edit_mode') {
+    document.getElementById('tweaks-panel').style.display = 'none';
+  }
+});
+window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+</script>
+
+<!-- ── TWEAKS PANEL ── -->
+<div id="tweaks-panel" style="display:none;position:fixed;bottom:24px;right:24px;z-index:9999;
+  background:#0D0D0D;border:1px solid #242424;padding:24px;min-width:260px;
+  font-family:'Share Tech Mono',monospace;flex-direction:column;gap:16px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+    <span style="font-size:9px;color:#39FF14;letter-spacing:4px;">// TWEAKS</span>
+    <button onclick="document.getElementById('tweaks-panel').style.display='none';window.parent.postMessage({type:'__edit_mode_dismissed'},'*')"
+      style="background:none;border:none;color:#888;cursor:pointer;font-family:inherit;font-size:10px;letter-spacing:2px;">✕</button>
+  </div>
+  <div>
+    <div style="font-size:8px;color:#888;letter-spacing:3px;margin-bottom:8px;">COR DE ACENTO</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button onclick="setAccent('#39FF14')" style="width:28px;height:28px;background:#39FF14;border:none;cursor:pointer;"></button>
+      <button onclick="setAccent('#00EEFF')" style="width:28px;height:28px;background:#00EEFF;border:none;cursor:pointer;"></button>
+      <button onclick="setAccent('#FF6B35')" style="width:28px;height:28px;background:#FF6B35;border:none;cursor:pointer;"></button>
+      <button onclick="setAccent('#E8FF00')" style="width:28px;height:28px;background:#E8FF00;border:none;cursor:pointer;"></button>
+      <button onclick="setAccent('#FF3FD6')" style="width:28px;height:28px;background:#FF3FD6;border:none;cursor:pointer;"></button>
+    </div>
+  </div>
+  <div>
+    <div style="font-size:8px;color:#888;letter-spacing:3px;margin-bottom:8px;">FUNDO</div>
+    <div style="display:flex;gap:8px;">
+      <button onclick="setBg('#080808','#F4F4F2')" style="width:28px;height:28px;background:#080808;border:1px solid #333;cursor:pointer;"></button>
+      <button onclick="setBg('#F4F4F2','#0D0D0D')" style="width:28px;height:28px;background:#F4F4F2;border:1px solid #ccc;cursor:pointer;"></button>
+      <button onclick="setBg('#0A0A1A','#F4F4F2')" style="width:28px;height:28px;background:#0A0A1A;border:1px solid #333;cursor:pointer;"></button>
+    </div>
+  </div>
+  <div>
+    <div style="font-size:8px;color:#888;letter-spacing:3px;margin-bottom:8px;">GRID DE FUNDO</div>
+    <div style="display:flex;gap:8px;">
+      <button id="grid-on" onclick="toggleGrid(true)"
+        style="font-size:9px;letter-spacing:2px;padding:6px 14px;background:var(--neon);color:#080808;border:none;cursor:pointer;font-family:inherit;">ON</button>
+      <button id="grid-off" onclick="toggleGrid(false)"
+        style="font-size:9px;letter-spacing:2px;padding:6px 14px;background:none;color:#888;border:1px solid #333;cursor:pointer;font-family:inherit;">OFF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function setAccent(color) {
+  document.documentElement.style.setProperty('--neon', color);
+}
+function setBg(bg, fg) {
+  document.documentElement.style.setProperty('--black', bg);
+  document.documentElement.style.setProperty('--ink', bg === '#F4F4F2' ? '#E8E8E6' : '#0D0D0D');
+  document.documentElement.style.setProperty('--white', fg);
+  document.documentElement.style.setProperty('--border', bg === '#F4F4F2' ? '#D0D0CE' : '#1C1C1C');
+  document.body.style.background = bg;
+  document.body.style.color = fg;
+}
+let gridOn = true;
+function toggleGrid(on) {
+  gridOn = on;
+  const hero = document.querySelector('.hero');
+  if (!on) {
+    hero.style.setProperty('--grid-opacity','0');
+    hero.style.backgroundImage = 'none';
+  } else {
+    hero.style.backgroundImage = '';
+  }
+}
+</script>
+
+</body>
+</html>
