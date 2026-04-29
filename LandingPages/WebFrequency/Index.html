@@ -33,7 +33,7 @@ body {
 /* ── UTILITIES ── */
 .neon { color: var(--neon); }
 .label {
-  font-size: 9px;
+  font-size: 14px;
   color: var(--neon);
   letter-spacing: 4px;
   text-transform: uppercase;
@@ -61,23 +61,24 @@ nav {
 
 .nav-logo {
   display: flex;
-  align-items: center;
-  gap: 6px;
+  align-items: flex-end;
+  gap: 5px;
   text-decoration: none;
 }
 
 .nav-logo svg { flex-shrink: 0; }
 
 .nav-logo-dot {
-  width: 5px; height: 5px;
+  width: 7px; height: 7px;
   background: var(--neon);
-  margin-bottom: -2px;
+  flex-shrink: 0;
+  margin-bottom: 6px;
 }
 
 .nav-logo-co {
   font-family: 'EB Garamond', serif;
   font-style: italic;
-  font-size: 26px;
+  font-size: 30px;
   color: var(--white);
   line-height: 1;
   letter-spacing: -0.5px;
@@ -439,7 +440,7 @@ section {
 .wf-name .freq { color: var(--green-m); }
 
 .wf-tagline {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--gray);
   letter-spacing: 4px;
   margin-bottom: 64px;
@@ -461,6 +462,8 @@ section {
   overflow: hidden;
   transition: border-color 0.3s;
   cursor: default;
+  display: flex;
+  flex-direction: column;
 }
 
 .plan-card:hover { border-color: var(--gray-dim); }
@@ -476,14 +479,14 @@ section {
   display: inline-block;
   background: var(--green);
   color: var(--neon);
-  font-size: 7px;
+  font-size: 12px;
   letter-spacing: 3px;
   padding: 3px 10px;
   margin-bottom: 24px;
 }
 
 .plan-name-label {
-  font-size: 9px;
+  font-size: 12px;
   color: var(--neon);
   letter-spacing: 4px;
   margin-bottom: 8px;
@@ -531,6 +534,7 @@ section {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  flex: 1;
 }
 
 .plan-features li {
@@ -810,7 +814,7 @@ section {
 }
 
 .cta-eyebrow {
-  font-size: 9px;
+  font-size: 12px;
   color: rgba(255,255,255,.4);
   letter-spacing: 5px;
   margin-bottom: 24px;
@@ -849,7 +853,7 @@ section {
   background: var(--neon);
   color: var(--green);
   text-decoration: none;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 3px;
   padding: 18px 36px;
@@ -859,7 +863,7 @@ section {
 .cta-btn:hover { opacity: 0.88; }
 
 .cta-note {
-  font-size: 9px;
+  font-size: 12px;
   color: rgba(255,255,255,.25);
   letter-spacing: 2px;
 }
@@ -876,15 +880,43 @@ footer {
 
 .footer-logo {
   display: flex;
-  align-items: center;
-  gap: 6px;
+  align-items: flex-end;
+  gap: 5px;
 }
 
 .footer-logo-co {
   font-family: 'EB Garamond', serif;
   font-style: italic;
-  font-size: 22px;
+  font-size: 26px;
   color: var(--white);
+  line-height: 1;
+}
+
+/* ── PLANO MENSAL ── */
+.plan-monthly {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 6px;
+  padding: 8px 10px;
+  background: rgba(57,255,20,.04);
+  border: 1px solid rgba(57,255,20,.12);
+}
+.plan-monthly-val {
+  font-family: 'EB Garamond', serif;
+  font-size: 22px;
+  color: var(--neon);
+  line-height: 1;
+}
+.plan-monthly-val sup {
+  font-size: 11px;
+  vertical-align: super;
+  color: var(--green-m);
+}
+.plan-monthly-label {
+  font-size: 9px;
+  color: var(--gray);
+  letter-spacing: 2px;
 }
 
 .footer-copy {
@@ -967,10 +999,10 @@ footer {
 <nav>
   <a href="#" class="nav-logo">
     <svg width="32" height="32" viewBox="0 0 62 62" fill="none">
-      <line x1="10" y1="52" x2="10" y2="10" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
-      <line x1="10" y1="10" x2="31" y2="36" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
-      <line x1="31" y1="36" x2="52" y2="10" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
-      <line x1="52" y1="10" x2="52" y2="52" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
+      <line x1="10" y1="54" x2="10" y2="10" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
+      <line x1="10" y1="10" x2="31" y2="38" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
+      <line x1="31" y1="38" x2="52" y2="10" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
+      <line x1="52" y1="10" x2="52" y2="54" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
     </svg>
     <div class="nav-logo-dot"></div>
     <span class="nav-logo-co">Co</span>
@@ -1050,7 +1082,7 @@ footer {
     </div>
     <div class="sobre-stats reveal" style="transition-delay: 0.15s;">
       <div class="stat-card">
-        <div class="stat-num">7<span>d</span></div>
+        <div class="stat-num">15<span>d</span></div>
         <div class="stat-label">ENTREGA LANDING PAGE</div>
       </div>
       <div class="stat-card">
@@ -1097,8 +1129,9 @@ footer {
     <div class="plan-card reveal" style="transition-delay: 0.1s;">
       <div class="plan-name-label">landing page</div>
       <div class="plan-name">Entrada</div>
-      <div class="plan-price"><sup>R$</sup>890</div>
-      <div class="plan-prazo">// entrega em até 7 dias úteis</div>
+      <div class="plan-price"><sup>R$</sup>1.190</div>
+      <div class="plan-monthly"><span class="plan-monthly-val"><sup>R$</sup>120</span><span class="plan-monthly-label">/ mês</span></div>
+      <div class="plan-prazo">// Entrega de 10 a 15 dias úteis</div>
       <div class="plan-divider"></div>
       <ul class="plan-features">
         <li>1 página otimizada e responsiva</li>
@@ -1106,10 +1139,9 @@ footer {
         <li>Formulário de contato</li>
         <li>SEO básico configurado</li>
         <li>Hospedagem inclusa no 1º ano</li>
-        <li>Domínio incluso no 1º ano</li>
-        <li class="muted">Blog integrado</li>
-        <li class="muted">Múltiplas páginas</li>
-        <li class="muted">Integrações avançadas</li>
+        <li class="muted">Galeria / portfólio</li>
+        <li class="muted">Blog / seção de notícias</li>
+        <li class="muted">Atualizações mensais inclusas</li>
       </ul>
       <a href="#contato" class="plan-cta">SOLICITAR →</a>
     </div>
@@ -1117,21 +1149,22 @@ footer {
     <!-- Site Profissional -->
     <div class="plan-card featured reveal" style="transition-delay: 0.2s;">
       <div class="plan-badge">// MAIS VENDIDO</div>
-      <div class="plan-name-label">site profissional</div>
+      <div class="plan-name-label">site Institucional</div>
       <div class="plan-name">Profissional</div>
-      <div class="plan-price"><sup>R$</sup>2.490</div>
-      <div class="plan-prazo">// entrega em até 15 dias úteis</div>
+      <div class="plan-price"><sup>R$</sup>2.290</div>
+      <div class="plan-monthly"><span class="plan-monthly-val"><sup>R$</sup>340</span><span class="plan-monthly-label">/ mês</span></div>
+      <div class="plan-prazo">// Entrega de 20 a 25 dias úteis</div>
       <div class="plan-divider"></div>
       <ul class="plan-features">
         <li>Até 5 páginas completas</li>
-        <li>Integração com WhatsApp</li>
-        <li>Formulário de contato</li>
-        <li>SEO técnico completo</li>
+        <li>Design exclusivo</li>
+        <li>Galeria / portfólio</li>
+        <li>Formulário avançado</li>
+        <li>SEO otimizado</li>
         <li>Hospedagem inclusa no 1º ano</li>
-        <li>Domínio incluso no 1º ano</li>
-        <li>Mapa e localização integrados</li>
-        <li>Galeria de produtos/serviços</li>
-        <li class="muted">Blog integrado</li>
+        <li class="muted">Blog / seção de notícias</li>
+        <li class="muted">Atualizações mensais inclusas</li>
+        <li class="muted">Múltiplos formulários</li>
       </ul>
       <a href="#contato" class="plan-cta">SOLICITAR →</a>
     </div>
@@ -1141,27 +1174,19 @@ footer {
       <div class="plan-name-label">site premium</div>
       <div class="plan-name">Premium</div>
       <div class="plan-price"><sup>R$</sup>4.890</div>
-      <div class="plan-prazo">// entrega em até 25 dias úteis</div>
+      <div class="plan-monthly"><span class="plan-monthly-val"><sup>R$</sup>560</span><span class="plan-monthly-label">/ mês</span></div>
+      <div class="plan-prazo">// Entrega de 30 a 35 dias úteis</div>
       <div class="plan-divider"></div>
       <ul class="plan-features">
-        <li>Até 8 páginas sob medida</li>
-        <li>Integração com WhatsApp</li>
-        <li>Formulário de contato avançado</li>
-        <li>SEO avançado + performance</li>
+        <li>Até 8 páginas completas</li>
+        <li>Blog / seção de notícias</li>
+        <li>Atualizações mensais inclusas</li>
+        <li>Múltiplos formulários</li>
+        <li>SEO avançado completo</li>
         <li>Hospedagem inclusa no 1º ano</li>
-        <li>Domínio incluso no 1º ano</li>
-        <li>Mapa e localização integrados</li>
-        <li>Blog integrado e gerenciável</li>
-        <li>Integrações personalizadas</li>
       </ul>
       <a href="#contato" class="plan-cta">SOLICITAR →</a>
     </div>
-  </div>
-
-  <div style="margin-top:24px; max-width:1200px;">
-    <p style="font-size:9px;color:var(--gray-dim);letter-spacing:2px;">
-      * Todos os planos incluem suporte técnico no período de garantia. Manutenção mensal disponível como serviço adicional.
-    </p>
   </div>
 </section>
 
@@ -1326,15 +1351,7 @@ footer {
       </ul>
     </div>
     <div class="moonpany-visual reveal" style="transition-delay:0.2s;">
-      <div class="moonpany-placeholder">
-        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-          <rect x="4" y="12" width="40" height="32" rx="1" stroke="#444" stroke-width="1.5"/>
-          <path d="M44 20l12-6v24l-12-6V20z" stroke="#444" stroke-width="1.5" stroke-linejoin="round"/>
-          <circle cx="24" cy="28" r="6" stroke="#444" stroke-width="1.5"/>
-          <path d="M4 36l10-10 8 8 6-6 16 16" stroke="#444" stroke-width="1" opacity=".5"/>
-        </svg>
-        <p>produção áudio visual</p>
-      </div>
+      <img src="assets/CompositionLogo-MNPY-Green.png" width="80%" height="auto"/>
     </div>
   </div>
 </section>
@@ -1349,10 +1366,10 @@ footer {
       Sem enrolação. Entrega garantida.
     </div>
     <div class="cta-actions">
-      <a href="https://wa.me/55" class="cta-btn">
-        FALAR COM LUCAS →
+      <a href="https://wa.me/5514997597300" class="cta-btn">
+        FALAR COM ATENDENTE →
       </a>
-      <span class="cta-note">// WhatsApp · Resposta em até 2h</span>
+      <span class="cta-note">// WhatsApp</span>
     </div>
   </div>
 </section>
@@ -1361,13 +1378,13 @@ footer {
 <footer>
   <div class="footer-logo">
     <svg width="24" height="24" viewBox="0 0 62 62" fill="none">
-      <line x1="10" y1="52" x2="10" y2="10" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
-      <line x1="10" y1="10" x2="31" y2="36" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
-      <line x1="31" y1="36" x2="52" y2="10" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
-      <line x1="52" y1="10" x2="52" y2="52" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
+      <line x1="10" y1="54" x2="10" y2="10" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
+      <line x1="10" y1="10" x2="31" y2="38" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
+      <line x1="31" y1="38" x2="52" y2="10" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
+      <line x1="52" y1="10" x2="52" y2="54" stroke="#F4F4F2" stroke-width="5" stroke-linecap="square"/>
     </svg>
-    <div style="width:4px;height:4px;background:var(--neon);margin-bottom:-1px;margin-left:4px;"></div>
-    <span class="footer-logo-co" style="margin-left:4px;">Co</span>
+    <div style="width:7px;height:7px;background:var(--neon);margin-bottom:5px;margin-left:3px;flex-shrink:0;"></div>
+    <span class="footer-logo-co" style="margin-left:3px;">Co</span>
   </div>
   <div class="footer-copy">© 2026 M.Co — Meirelles Company. WebFrequency · Moonpany</div>
   <div class="footer-links">
